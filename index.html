@@ -1,122 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poem World | Vansh Sharma</title>
-<style>
-    body { font-family: Arial; background: #111; color: #fff; margin: 0; text-align: center; }
-    h1 { color: gold; margin: 20px; }
-    .container { max-width: 600px; margin: 20px auto; background: #222; padding: 20px; border-radius: 10px; }
-    textarea { width: 90%; height: 100px; margin-bottom: 10px; font-size: 16px; padding: 10px; border-radius: 5px; border: none; }
-    button { padding: 10px 15px; font-size: 14px; margin: 5px; background: gold; color: #000; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: orange; }
-    .poem-card { background: #333; margin: 10px; padding: 10px; border-radius: 5px; text-align: left; }
-    .controls button { margin-right: 8px; }
-    .search-box { margin: 10px auto; padding: 10px; width: 90%; border-radius: 5px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8vansh Creation</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Cinzel+Decorative:wght@700&family=Merriweather&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Merriweather', serif;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #000);
+      color: #fff;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 15px;
+      border-bottom: 2px solid #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.4);
+    }
+
+    header img {
+      width: 140px;
+      margin-bottom: 15px;
+    }
+
+    header h1 {
+      font-family: 'Cinzel Decorative', cursive;
+      font-size: 2.5rem;
+      color: #FFD700;
+      text-shadow: 0 0 15px #ffbf00;
+      margin: 10px 0;
+    }
+
+    header p {
+      color: #ccc;
+    }
+
+    /* Section Title */
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin: 40px 0 20px;
+      color: #FFD700;
+      text-shadow: 0 0 10px #ffeb7a, 0 0 20px #ffbf00;
+      font-family: 'Cinzel', serif;
+    }
+
+    /* Poem Section */
+    .poems-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .poem-card {
+      background: #111;
+      border: 2px solid #FFD700;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .poem-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+    }
+
+    .poem-title {
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: #FFD700;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #FFD700;
+      padding-bottom: 5px;
+      text-shadow: 0 0 8px #ffeb7a;
+      font-family: 'Cinzel Decorative', cursive;
+    }
+
+    .poem-text {
+      font-size: 1rem;
+      color: #f5f5f5;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      white-space: pre-wrap;
+    }
+
+    .poem-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .poem-btn {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+    }
+
+    .copy-btn {
+      background: #FFD700;
+      color: #111;
+    }
+    .copy-btn:hover { background: #ffcc00; }
+
+    .delete-btn {
+      background: #d62828;
+      color: #fff;
+    }
+    .delete-btn:hover { background: #a4161a; }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #444;
+      margin-top: 30px;
+      color: #aaa;
+    }
+
+    footer a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-<h1>🌟 Vansh Sharma | Poem World</h1>
 
-<div class="container">
-    <h2>Write Your Poem ✍️</h2>
-    <textarea id="poemInput" placeholder="Write your poem here..."></textarea><br>
-    <button onclick="submitPoem()">Share Poem</button>
-</div>
+  <!-- Header -->
+  <header>
+    <img src="your-logo.png" alt="Logo"> <!-- Replace with your logo -->
+    <h1>8vansh Creation</h1>
+    <p>✨ Poetry | Vibes | Creations ✨</p>
+  </header>
 
-<div class="container">
-    <input class="search-box" id="searchBox" type="text" placeholder="Search poems..." onkeyup="filterPoems()">
-</div>
+  <!-- Poems Section -->
+  <section class="poems-section">
+    <h2 class="section-title">🌟 Poems 🌟</h2>
+    <div id="poems-list" class="poems-list"></div>
+  </section>
 
-<div class="container">
-    <h2>All Poems 📜</h2>
-    <div id="poemList"><p>Loading poems...</p></div>
-</div>
+  <!-- Footer -->
+  <footer>
+    <p>📩 Contact: <a href="mailto:vansh72081@gmail.com">vansh72081@gmail.com</a></p>
+    <p>📸 Instagram: <a href="https://instagram.com/8vanshcreation" target="_blank">@8vanshcreation</a></p>
+  </footer>
 
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwhRXrYO1NCgAtzmStncbslw3h3S4qA1i0ThCm2dgyKlQS2txd2faKd6ku8eya4xa778A/exec";
-let allPoems = [];
+  <!-- Firebase + Scripts -->
+  <script type="module">
+    // Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-// ✅ Submit Poem
-async function submitPoem() {
-    const poem = document.getElementById("poemInput").value.trim();
-    if (!poem) return alert("Please write a poem first!");
-    await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ action: "add", poem: poem }),
-        headers: { "Content-Type": "application/json" }
+    // Your Firebase Config (replace with your details)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT.firebaseio.com",
+      projectId: "YOUR_PROJECT",
+      storageBucket: "YOUR_PROJECT.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const poemsRef = ref(db, "poems");
+
+    // Render Poems
+    function renderPoem(id, poemData, isOwner = true) {
+      const poemCard = document.createElement("div");
+      poemCard.className = "poem-card";
+
+      poemCard.innerHTML = `
+        <div class="poem-title">${poemData.title || "Untitled"}</div>
+        <div class="poem-text">${poemData.text}</div>
+        <div class="poem-actions">
+          <button class="poem-btn copy-btn">📋 Copy</button>
+          ${isOwner ? '<button class="poem-btn delete-btn">❌ Delete</button>' : ""}
+        </div>
+      `;
+
+      // Copy Button
+      poemCard.querySelector(".copy-btn").addEventListener("click", () => {
+        navigator.clipboard.writeText(poemData.text);
+        alert("Poem copied to clipboard!");
+      });
+
+      // Delete Button
+      if (isOwner) {
+        poemCard.querySelector(".delete-btn").addEventListener("click", () => {
+          if (confirm("Delete this poem?")) {
+            remove(ref(db, "poems/" + id));
+          }
+        });
+      }
+
+      document.getElementById("poems-list").appendChild(poemCard);
+    }
+
+    // Load Poems from Firebase
+    onValue(poemsRef, (snapshot) => {
+      const list = document.getElementById("poems-list");
+      list.innerHTML = "";
+      snapshot.forEach(child => {
+        renderPoem(child.key, child.val());
+      });
     });
-    alert("Poem shared!");
-    document.getElementById("poemInput").value = "";
-    loadPoems();
-}
-
-// ✅ Like a poem
-async function likePoem(date) {
-    await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ action: "like", date: date }),
-        headers: { "Content-Type": "application/json" }
-    });
-    loadPoems();
-}
-
-// ✅ Delete a poem
-async function deletePoem(date) {
-    if (!confirm("Delete this poem?")) return;
-    await fetch(SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({ action: "delete", date: date }),
-        headers: { "Content-Type": "application/json" }
-    });
-    loadPoems();
-}
-
-// ✅ Load poems
-async function loadPoems() {
-    const res = await fetch(SCRIPT_URL);
-    const data = await res.json();
-    allPoems = data;
-    displayPoems(data);
-}
-
-// ✅ Display poems
-function displayPoems(data) {
-    const list = document.getElementById("poemList");
-    list.innerHTML = "";
-    if (data.length === 0) return list.innerHTML = "<p>No poems yet!</p>";
-    data.reverse().forEach(p => {
-        const date = p[0], poem = p[1], likes = p[2] || 0;
-        const div = document.createElement("div");
-        div.className = "poem-card";
-        div.innerHTML = `
-            <p>${poem}</p>
-            <small>${date}</small>
-            <div class="controls">
-                <button onclick="likePoem('${date}')">👍 ${likes}</button>
-                <button onclick="deletePoem('${date}')">🗑 Delete</button>
-                <button onclick="copyPoem('${poem}')">📋 Share</button>
-            </div>
-        `;
-        list.appendChild(div);
-    });
-}
-
-// ✅ Search filter
-function filterPoems() {
-    const keyword = document.getElementById("searchBox").value.toLowerCase();
-    const filtered = allPoems.filter(p => p[1].toLowerCase().includes(keyword));
-    displayPoems(filtered);
-}
-
-// ✅ Copy to clipboard
-function copyPoem(text) {
-    navigator.clipboard.writeText(text);
-    alert("Poem copied!");
-}
-
-loadPoems();
-</script>
+  </script>
 </body>
 </html>
