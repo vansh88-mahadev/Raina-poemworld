@@ -40,7 +40,6 @@
       color: #ccc;
     }
 
-    /* Section Title */
     .section-title {
       text-align: center;
       font-size: 2.2rem;
@@ -50,7 +49,44 @@
       font-family: 'Cinzel', serif;
     }
 
-    /* Poem Section */
+    /* Form Section */
+    .add-poem {
+      max-width: 600px;
+      margin: 0 auto 40px;
+      background: #111;
+      padding: 20px;
+      border-radius: 15px;
+      border: 2px solid #FFD700;
+      box-shadow: 0 0 15px rgba(255,215,0,0.4);
+    }
+
+    .add-poem input, .add-poem textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #FFD700;
+      background: #000;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .add-poem button {
+      padding: 10px 20px;
+      background: #FFD700;
+      color: #111;
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .add-poem button:hover {
+      background: #ffcc00;
+    }
+
+    /* Poems Section */
     .poems-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -79,143 +115,117 @@
       margin-bottom: 12px;
       border-bottom: 1px solid #FFD700;
       padding-bottom: 5px;
-      text-shadow: 0 0 8px #ffeb7a;
-      font-family: 'Cinzel Decorative', cursive;
     }
 
     .poem-text {
-      font-size: 1rem;
-      color: #f5f5f5;
-      line-height: 1.6;
-      margin-bottom: 15px;
       white-space: pre-wrap;
+      color: #eee;
+      margin-bottom: 15px;
     }
 
-    .poem-actions {
+    .btns {
       display: flex;
-      justify-content: flex-end;
-      gap: 12px;
+      justify-content: space-between;
     }
 
-    .poem-btn {
-      padding: 6px 14px;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      font-weight: bold;
-      cursor: pointer;
+    .btns button {
+      padding: 8px 15px;
       border: none;
-      transition: 0.3s;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     .copy-btn {
       background: #FFD700;
       color: #111;
     }
-    .copy-btn:hover { background: #ffcc00; }
 
     .delete-btn {
-      background: #d62828;
+      background: #ff4444;
       color: #fff;
     }
-    .delete-btn:hover { background: #a4161a; }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #444;
-      margin-top: 30px;
-      color: #aaa;
-    }
-
-    footer a {
-      color: #FFD700;
-      text-decoration: none;
-      font-weight: bold;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
-    <img src="your-logo.png" alt="Logo"> <!-- Replace with your logo -->
+    <img src="logom.png" alt="8vansh Creation Logo">
     <h1>8vansh Creation</h1>
-    <p>✨ Poetry | Vibes | Creations ✨</p>
+    <p>By @8vanshcreation | 📧 vansh72081@gmail.com</p>
   </header>
 
+  <!-- Add Poem Form -->
+  <h2 class="section-title">✨ Add New Poem ✨</h2>
+  <div class="add-poem">
+    <input type="text" id="poemTitle" placeholder="Enter poem title...">
+    <textarea id="poemText" rows="5" placeholder="Write your poem here..."></textarea>
+    <button onclick="addPoem()">Add Poem</button>
+  </div>
+
   <!-- Poems Section -->
-  <section class="poems-section">
-    <h2 class="section-title">🌟 Poems 🌟</h2>
-    <div id="poems-list" class="poems-list"></div>
-  </section>
+  <h2 class="section-title">🌟 My Poems 🌟</h2>
+  <div id="poemsList" class="poems-list"></div>
 
-  <!-- Footer -->
-  <footer>
-    <p>📩 Contact: <a href="mailto:vansh72081@gmail.com">vansh72081@gmail.com</a></p>
-    <p>📸 Instagram: <a href="https://instagram.com/8vanshcreation" target="_blank">@8vanshcreation</a></p>
-  </footer>
-
-  <!-- Firebase + Scripts -->
   <script type="module">
     // Import Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-    import { getDatabase, ref, onValue, remove } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // Your Firebase Config (replace with your details)
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT.firebaseio.com",
-      projectId: "YOUR_PROJECT",
-      storageBucket: "YOUR_PROJECT.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyA0-iMDJHX0vwpXi1lUT65QgcBQ4oMfe3I",
+      authDomain: "vanshcreation-poem.firebaseapp.com",
+      projectId: "vanshcreation-poem",
+      storageBucket: "vanshcreation-poem.appspot.com",
+      messagingSenderId: "1031323420580",
+      appId: "1:1031323420580:web:8cd2e955c8d571308ba331",
+      measurementId: "G-E28Z2798DN"
     };
 
     const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    const poemsRef = ref(db, "poems");
+    const db = getFirestore(app);
 
-    // Render Poems
-    function renderPoem(id, poemData, isOwner = true) {
-      const poemCard = document.createElement("div");
-      poemCard.className = "poem-card";
-
-      poemCard.innerHTML = `
-        <div class="poem-title">${poemData.title || "Untitled"}</div>
-        <div class="poem-text">${poemData.text}</div>
-        <div class="poem-actions">
-          <button class="poem-btn copy-btn">📋 Copy</button>
-          ${isOwner ? '<button class="poem-btn delete-btn">❌ Delete</button>' : ""}
-        </div>
-      `;
-
-      // Copy Button
-      poemCard.querySelector(".copy-btn").addEventListener("click", () => {
-        navigator.clipboard.writeText(poemData.text);
-        alert("Poem copied to clipboard!");
-      });
-
-      // Delete Button
-      if (isOwner) {
-        poemCard.querySelector(".delete-btn").addEventListener("click", () => {
-          if (confirm("Delete this poem?")) {
-            remove(ref(db, "poems/" + id));
-          }
-        });
+    async function addPoem() {
+      const title = document.getElementById("poemTitle").value.trim();
+      const text = document.getElementById("poemText").value.trim();
+      if (!title || !text) {
+        alert("Please enter title and poem!");
+        return;
       }
-
-      document.getElementById("poems-list").appendChild(poemCard);
+      await addDoc(collection(db, "poems"), { title, text });
+      document.getElementById("poemTitle").value = "";
+      document.getElementById("poemText").value = "";
+      loadPoems();
     }
 
-    // Load Poems from Firebase
-    onValue(poemsRef, (snapshot) => {
-      const list = document.getElementById("poems-list");
-      list.innerHTML = "";
-      snapshot.forEach(child => {
-        renderPoem(child.key, child.val());
+    async function loadPoems() {
+      const poemsList = document.getElementById("poemsList");
+      poemsList.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "poems"));
+      querySnapshot.forEach((docu) => {
+        const poem = docu.data();
+        const card = document.createElement("div");
+        card.className = "poem-card";
+        card.innerHTML = `
+          <div class="poem-title">${poem.title}</div>
+          <div class="poem-text">${poem.text}</div>
+          <div class="btns">
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(\`${poem.text}\`)">📋 Copy</button>
+            <button class="delete-btn" onclick="deletePoem('${docu.id}')">❌ Delete</button>
+          </div>
+        `;
+        poemsList.appendChild(card);
       });
-    });
+    }
+
+    async function deletePoem(id) {
+      await deleteDoc(doc(db, "poems", id));
+      loadPoems();
+    }
+
+    window.deletePoem = deletePoem;
+    window.onload = loadPoems;
   </script>
 </body>
 </html>
