@@ -1,231 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>8vansh Creation</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Cinzel+Decorative:wght@700&family=Merriweather&display=swap" rel="stylesheet">
-
   <style>
+    :root {
+      --gold: #f2b705;
+    }
     body {
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      font-family: 'Merriweather', serif;
-      background: linear-gradient(135deg, #0f0f0f, #1a1a1a, #000);
+      background: linear-gradient(135deg,#111,#222);
       color: #fff;
     }
-
     header {
-      text-align: center;
-      padding: 30px 15px;
-      border-bottom: 2px solid #FFD700;
-      box-shadow: 0 0 15px rgba(255,215,0,0.4);
-    }
-
-    header img {
-      width: 140px;
-      margin-bottom: 15px;
-    }
-
-    header h1 {
-      font-family: 'Cinzel Decorative', cursive;
-      font-size: 2.5rem;
-      color: #FFD700;
-      text-shadow: 0 0 15px #ffbf00;
-      margin: 10px 0;
-    }
-
-    header p {
-      color: #ccc;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 2.2rem;
-      margin: 40px 0 20px;
-      color: #FFD700;
-      text-shadow: 0 0 10px #ffeb7a, 0 0 20px #ffbf00;
-      font-family: 'Cinzel', serif;
-    }
-
-    /* Form Section */
-    .add-poem {
-      max-width: 600px;
-      margin: 0 auto 40px;
-      background: #111;
-      padding: 20px;
-      border-radius: 15px;
-      border: 2px solid #FFD700;
-      box-shadow: 0 0 15px rgba(255,215,0,0.4);
-    }
-
-    .add-poem input, .add-poem textarea {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #FFD700;
-      background: #000;
-      color: #fff;
-      font-size: 1rem;
-    }
-
-    .add-poem button {
-      padding: 10px 20px;
-      background: #FFD700;
-      color: #111;
-      border: none;
-      font-weight: bold;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .add-poem button:hover {
-      background: #ffcc00;
-    }
-
-    /* Poems Section */
-    .poems-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-      padding: 20px;
-    }
-
-    .poem-card {
-      background: #111;
-      border: 2px solid #FFD700;
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .poem-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
-    }
-
-    .poem-title {
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: #FFD700;
-      margin-bottom: 12px;
-      border-bottom: 1px solid #FFD700;
-      padding-bottom: 5px;
-    }
-
-    .poem-text {
-      white-space: pre-wrap;
-      color: #eee;
-      margin-bottom: 15px;
-    }
-
-    .btns {
+      background: linear-gradient(90deg,#000,#333);
+      color: var(--gold);
+      padding: 15px 25px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    header img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 25px;
+    }
+    .section {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(242,183,5,0.4);
+      border-radius: 14px;
+      padding: 20px;
+      flex: 1 1 300px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .section h2 {
+      color: var(--gold);
+      margin-top: 0;
+      border-bottom: 1px solid rgba(242,183,5,0.4);
+      padding-bottom: 8px;
     }
 
-    .btns button {
-      padding: 8px 15px;
+    /* Poem Input Form */
+    #poemForm textarea {
+      width: 100%;
+      height: 90px;
+      border-radius: 10px;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid var(--gold);
+      background: #111;
+      color: #fff;
+      resize: vertical;
+    }
+    #poemForm button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border-radius: 8px;
       border: none;
-      border-radius: 6px;
       cursor: pointer;
+      background: linear-gradient(180deg,var(--gold),#d49b03);
+      color: #111;
       font-weight: bold;
     }
-
-    .copy-btn {
-      background: #FFD700;
-      color: #111;
+    #poemForm button:hover {
+      background: linear-gradient(180deg,#ffd84d,#d49b03);
     }
 
-    .delete-btn {
-      background: #ff4444;
+    /* Poem Golden Cards */
+    #feed {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(242,183,5,0.08), rgba(0,0,0,0.4));
+      border: 1px solid var(--gold);
+      padding: 18px;
+      border-radius: 16px;
+      position: relative;
+      box-shadow: 0 6px 20px rgba(242,183,5,0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(242,183,5,0.35);
+    }
+    .poem {
+      white-space: pre-wrap;
+      font-size: 17px;
+      line-height: 1.6;
       color: #fff;
+      font-family: "Georgia", serif;
+    }
+    .hidden-name {
+      font-size: 14px;
+      color: var(--gold);
+      margin-top: 8px;
+      display: none;
+    }
+    .controls {
+      margin-top: 12px;
+      display: flex;
+      gap: 10px;
+    }
+    .icon-btn {
+      background: linear-gradient(180deg, var(--gold), #d49b03);
+      color: #111;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+    .icon-btn:hover {
+      background: linear-gradient(180deg, #ffd84d, #d49b03);
+    }
+    .delete-btn {
+      display: none;
     }
 
+    footer {
+      background: #000;
+      padding: 15px;
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      margin: 0 8px;
+    }
   </style>
 </head>
 <body>
-
   <header>
-    <img src="logom.png" alt="8vansh Creation Logo">
-    <h1>8vansh Creation</h1>
-    <p>By @8vanshcreation | 📧 vansh72081@gmail.com</p>
+    <h1><img src="logom.png" alt="Logo"/> 8vansh Creation</h1>
+    <div>
+      <a href="https://instagram.com/8vanshcreation" target="_blank">@8vanshcreation</a> | 
+      <a href="mailto:vansh72081@gmail.com">Email</a>
+    </div>
   </header>
 
-  <!-- Add Poem Form -->
-  <h2 class="section-title">✨ Add New Poem ✨</h2>
-  <div class="add-poem">
-    <input type="text" id="poemTitle" placeholder="Enter poem title...">
-    <textarea id="poemText" rows="5" placeholder="Write your poem here..."></textarea>
-    <button onclick="addPoem()">Add Poem</button>
-  </div>
+  <main>
+    <!-- Add Poem -->
+    <div class="section">
+      <h2>Add a Poem</h2>
+      <form id="poemForm">
+        <textarea id="poemInput" placeholder="Write your poem here..."></textarea>
+        <br/>
+        <button type="submit">Add Poem</button>
+      </form>
+    </div>
 
-  <!-- Poems Section -->
-  <h2 class="section-title">🌟 My Poems 🌟</h2>
-  <div id="poemsList" class="poems-list"></div>
+    <!-- Poems Feed -->
+    <div class="section">
+      <h2>Poems</h2>
+      <div id="feed"></div>
+    </div>
+  </main>
 
-  <script type="module">
-    // Import Firebase
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+  <footer>
+    <p>© 2025 8vansh Creation | Follow on 
+      <a href="https://instagram.com/8vanshcreation">@8vanshcreation</a>
+    </p>
+  </footer>
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyA0-iMDJHX0vwpXi1lUT65QgcBQ4oMfe3I",
-      authDomain: "vanshcreation-poem.firebaseapp.com",
-      projectId: "vanshcreation-poem",
-      storageBucket: "vanshcreation-poem.appspot.com",
-      messagingSenderId: "1031323420580",
-      appId: "1:1031323420580:web:8cd2e955c8d571308ba331",
-      measurementId: "G-E28Z2798DN"
-    };
+  <script>
+    // Load poems from localStorage
+    const feed = document.getElementById('feed');
+    const poemForm = document.getElementById('poemForm');
+    const poemInput = document.getElementById('poemInput');
+    let poems = JSON.parse(localStorage.getItem('poems') || '[]');
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    function renderPoems() {
+      feed.innerHTML = '';
+      poems.forEach((text, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card';
 
-    async function addPoem() {
-      const title = document.getElementById("poemTitle").value.trim();
-      const text = document.getElementById("poemText").value.trim();
-      if (!title || !text) {
-        alert("Please enter title and poem!");
-        return;
-      }
-      await addDoc(collection(db, "poems"), { title, text });
-      document.getElementById("poemTitle").value = "";
-      document.getElementById("poemText").value = "";
-      loadPoems();
-    }
+        const poem = document.createElement('div');
+        poem.className = 'poem';
+        poem.textContent = text;
+        card.appendChild(poem);
 
-    async function loadPoems() {
-      const poemsList = document.getElementById("poemsList");
-      poemsList.innerHTML = "";
-      const querySnapshot = await getDocs(collection(db, "poems"));
-      querySnapshot.forEach((docu) => {
-        const poem = docu.data();
-        const card = document.createElement("div");
-        card.className = "poem-card";
-        card.innerHTML = `
-          <div class="poem-title">${poem.title}</div>
-          <div class="poem-text">${poem.text}</div>
-          <div class="btns">
-            <button class="copy-btn" onclick="navigator.clipboard.writeText(\`${poem.text}\`)">📋 Copy</button>
-            <button class="delete-btn" onclick="deletePoem('${docu.id}')">❌ Delete</button>
-          </div>
-        `;
-        poemsList.appendChild(card);
+        const controls = document.createElement('div');
+        controls.className = 'controls';
+
+        const copyBtn = document.createElement('button');
+        copyBtn.textContent = '📋 Copy';
+        copyBtn.className = 'icon-btn';
+        copyBtn.onclick = () => {
+          navigator.clipboard.writeText(text);
+          alert("Poem copied!");
+        };
+        controls.appendChild(copyBtn);
+
+        const delBtn = document.createElement('button');
+        delBtn.textContent = '❌ Delete';
+        delBtn.className = 'icon-btn delete-btn';
+        delBtn.onclick = () => {
+          poems.splice(idx,1);
+          localStorage.setItem('poems', JSON.stringify(poems));
+          renderPoems();
+        };
+        controls.appendChild(delBtn);
+
+        card.appendChild(controls);
+        feed.appendChild(card);
       });
     }
 
-    async function deletePoem(id) {
-      await deleteDoc(doc(db, "poems", id));
-      loadPoems();
-    }
+    poemForm.onsubmit = (e) => {
+      e.preventDefault();
+      const text = poemInput.value.trim();
+      if(text) {
+        poems.unshift(text);
+        localStorage.setItem('poems', JSON.stringify(poems));
+        poemInput.value = '';
+        renderPoems();
+      }
+    };
 
-    window.deletePoem = deletePoem;
-    window.onload = loadPoems;
+    renderPoems();
   </script>
 </body>
 </html>
